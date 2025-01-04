@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --black: #000000;
+  --yellow: #FFD700;
+  --dark-yellow: #FFB700;
+  --light-yellow: #FFED4A;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--yellow);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Efecto de resplandor amarillo */
+.glow-effect {
+  position: relative;
+}
+
+.glow-effect::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(45deg, var(--yellow), transparent, var(--yellow));
+  filter: blur(5px);
+  z-index: -1;
+}
+
+/* Efecto de texto con brillo */
+.text-glow {
+  text-shadow: 0 0 10px var(--yellow),
+               0 0 20px var(--yellow),
+               0 0 30px var(--yellow);
+}
+
+/* Efecto de borde brillante */
+.border-glow {
+  position: relative;
+  border: 1px solid var(--yellow);
+  box-shadow: 0 0 10px var(--yellow),
+              inset 0 0 10px var(--yellow);
+}
+
+/* Efecto de hover con glitch */
+.glitch-hover:hover {
+  animation: glitch 0.3s infinite;
+  color: var(--light-yellow);
+}
+
+/* Efecto de partículas de fondo */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  background: var(--yellow);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--yellow);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--light-yellow);
+}
+
+/* Selección de texto */
+::selection {
+  background: var(--yellow);
+  color: var(--black);
+}
+
+/* Animaciones de entrada */
+.slide-in-left {
+  animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.8s ease-out forwards;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.minecraft-font {
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+}
