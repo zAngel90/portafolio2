@@ -17,14 +17,17 @@ const Projects = () => {
       tech: ["Next.js", "TypeScript", "Tailwind CSS", "GitHub Pages"],
       github: "https://github.com/zAngel90/404",
       live: "https://zangel90.github.io/404/",
+      preview: "https://zangel90.github.io/404/",
       featured: true
     },
     {
-      title: 'Proyecto 3',
-      description: 'Descripción del proyecto 3. Explica aquí las tecnologías utilizadas y el propósito del proyecto.',
-      tech: ['React', 'Node.js', 'MongoDB'],
-      github: '#',
-      live: '#'
+      title: "App del Clima",
+      description: "Aplicación del clima moderna y elegante que muestra información meteorológica en tiempo real. Incluye búsqueda por ciudad, visualización de temperatura, humedad y velocidad del viento.",
+      tech: ["React", "Vite", "Tailwind CSS", "API REST", "GitHub Actions"],
+      github: "https://github.com/zAngel90/clima1",
+      live: "https://clima1-kappa.vercel.app/",
+      preview: "https://clima1-kappa.vercel.app/",
+      featured: true
     }
   ];
 
@@ -148,17 +151,18 @@ const Projects = () => {
               className="relative group"
               variants={projectVariants}
             >
-              {(index === 0 || index === 1) && (
+              {project.featured && (
                 <div className="relative w-full aspect-video mb-6 rounded-lg overflow-hidden
                               border border-yellow-400/30
                               transition-all duration-300 group-hover:border-yellow-400/60">
                   <div className="absolute inset-0 bg-black/60
                                 group-hover:bg-black/40 transition-all duration-300 z-10" />
                   <iframe
-                    src={project.live}
+                    src={project.preview || project.live}
                     className="absolute inset-0 w-full h-full"
                     title={`${project.title} Preview`}
                     loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     style={{ 
                       filter: 'none',
                       transform: 'scale(1)',
