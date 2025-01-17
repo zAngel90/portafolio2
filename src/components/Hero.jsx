@@ -75,7 +75,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
+    <section id="hero" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Fondo animado */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary via-tertiary to-primary opacity-90" />
@@ -94,18 +94,21 @@ const Hero = () => {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl w-full mx-auto relative z-10 py-12 sm:py-16 lg:py-20">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="text-center"
+          className="text-center sm:text-left px-4 sm:px-6 lg:px-8"
         >
           <motion.div variants={itemVariants} className="mb-6">
             <span className="text-secondary text-lg font-mono">{"<FullStackDeveloper>"}</span>
           </motion.div>
 
-          <motion.h2 variants={itemVariants} className="text-secondary text-lg mb-4">
+          <motion.h2
+            variants={itemVariants}
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4"
+          >
             ¡Hola! Mi nombre es
           </motion.h2>
 
@@ -125,7 +128,10 @@ const Hero = () => {
             Desarrollador Full Stack & Creador Digital
           </motion.h3>
 
-          <motion.p variants={itemVariants} className="text-lightestText max-w-2xl mx-auto mb-8">
+          <motion.p
+            variants={itemVariants}
+            className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-6 sm:mb-8"
+          >
             Especializado en crear experiencias digitales excepcionales tanto en el frontend como en el backend.
             Transformo ideas en soluciones tecnológicas completas y escalables con un enfoque en la innovación y la calidad.
           </motion.p>
@@ -150,7 +156,10 @@ const Hero = () => {
             </pre>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="flex gap-4 justify-center">
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4"
+          >
             <motion.a
               href="#projects"
               whileHover={{ scale: 1.05 }}
@@ -198,4 +207,4 @@ const Hero = () => {
   );
 };
 
-export default Hero; 
+export default Hero;

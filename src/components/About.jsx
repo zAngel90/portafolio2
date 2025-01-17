@@ -31,7 +31,7 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="min-h-screen bg-black py-20 px-4 relative overflow-hidden">
+    <section id="about" className="min-h-screen bg-black py-12 sm:py-20 px-4 relative overflow-hidden">
       {/* Fondo animado */}
       <div className="absolute inset-0">
         <motion.div
@@ -55,26 +55,26 @@ const About = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false, amount: 0.3 }}
-          className="text-center"
+          className="text-center space-y-8 sm:space-y-12"
         >
           <motion.h2 
             variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold mb-8 inline-block"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold inline-block"
           >
             <span className="bg-gradient-to-r from-yellow-400 to-yellow-200 text-transparent bg-clip-text">
               Sobre Mí
             </span>
           </motion.h2>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
             <motion.div 
               variants={itemVariants}
               className="relative group"
             >
               <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 to-yellow-200 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000"></div>
-              <div className="relative bg-black/80 p-6 rounded-lg border border-yellow-400/30 hover:border-yellow-400/60 transition duration-300">
-                <h3 className="text-2xl font-bold text-yellow-400 mb-4">Mi Trayectoria</h3>
-                <p className="text-yellow-100/90 leading-relaxed">
+              <div className="relative bg-black/80 p-4 sm:p-6 rounded-lg border border-yellow-400/30 hover:border-yellow-400/60 transition duration-300 h-full">
+                <h3 className="text-xl sm:text-2xl font-bold text-yellow-400 mb-3 sm:mb-4">Mi Trayectoria</h3>
+                <p className="text-sm sm:text-base text-yellow-100/90 leading-relaxed">
                   Soy un desarrollador apasionado por crear soluciones digitales innovadoras. 
                   Mi viaje en el desarrollo web comenzó con la curiosidad por entender cómo funcionan las cosas, 
                   y se convirtió en una pasión por construir experiencias digitales excepcionales.
@@ -87,9 +87,9 @@ const About = () => {
               className="relative group"
             >
               <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 to-yellow-200 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000"></div>
-              <div className="relative bg-black/80 p-6 rounded-lg border border-yellow-400/30 hover:border-yellow-400/60 transition duration-300">
-                <h3 className="text-2xl font-bold text-yellow-400 mb-4">Mi Enfoque</h3>
-                <p className="text-yellow-100/90 leading-relaxed">
+              <div className="relative bg-black/80 p-4 sm:p-6 rounded-lg border border-yellow-400/30 hover:border-yellow-400/60 transition duration-300 h-full">
+                <h3 className="text-xl sm:text-2xl font-bold text-yellow-400 mb-3 sm:mb-4">Mi Enfoque</h3>
+                <p className="text-sm sm:text-base text-yellow-100/90 leading-relaxed">
                   Me especializo en desarrollar aplicaciones web modernas y escalables, 
                   combinando tecnologías frontend y backend para crear soluciones completas. 
                   Mi objetivo es siempre entregar productos que no solo funcionen perfectamente, 
@@ -124,4 +124,4 @@ const About = () => {
   );
 };
 
-export default About; 
+export default About;

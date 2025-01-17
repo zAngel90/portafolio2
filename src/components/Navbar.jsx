@@ -4,6 +4,7 @@ import { Link as ScrollLink } from 'react-scroll';
 
 const Navbar = () => {
   const [hidden, setHidden] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('inicio');
   const { scrollY } = useScroll();
 
@@ -15,6 +16,10 @@ const Navbar = () => {
       setHidden(false);
     }
   });
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   const navItems = [
     { id: 'hero', label: 'Inicio' },
@@ -81,6 +86,7 @@ const Navbar = () => {
               duration={800}
               offset={-70}
               className="relative z-10"
+              onClick={() => setIsOpen(false)}
             >
               Portfolio
             </ScrollLink>
@@ -92,7 +98,29 @@ const Navbar = () => {
             />
           </motion.div>
 
-          {/* Navigation Items */}
+          {/* Hamburger Menu Button */}
+          <button
+            onClick={toggleMenu}
+            className="md:hidden p-2 rounded-md text-yellow-400 hover:bg-yellow-400/20 transition-colors"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              {isOpen ? (
+                <path d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+
+          {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-1">
             {navItems.map((item) => (
               <motion.div
@@ -106,65 +134,62 @@ const Navbar = () => {
                   spy={true}
                   smooth={true}
                   duration={800}
-                  offset={item.id === 'skills' ? -100 : -70}
+                  offset={-70}
+                  className={`text-sm font-medium relative z-10 ${
+                    activeSection === item.id ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'
+                  }`}
                   onSetActive={() => setActiveSection(item.id)}
-                  className={`relative z-10 ${
-                    activeSection === item.id ? 'text-yellow-400' : 'text-yellow-200/70'
-                  } transition-colors duration-200 group-hover:text-yellow-400 cursor-pointer`}
                 >
                   {item.label}
                 </ScrollLink>
-                {activeSection === item.id && (
-                  <motion.div
-                    layoutId="activeSection"
-                    className="absolute inset-0 bg-yellow-400/10 rounded-lg"
-                    initial={false}
-                    transition={{
-                      type: "spring",
-                      stiffness: 500,
-                      damping: 30
-                    }}
-                  />
-                )}
                 <motion.div
-                  className="absolute -inset-1 bg-yellow-400/0 rounded-lg"
-                  whileHover={{
-                    backgroundColor: "rgba(250, 204, 21, 0.1)",
-                    transition: { duration: 0.2 }
-                  }}
+                  className="absolute -inset-2 bg-yellow-400/20 rounded-lg blur-lg"
+                  variants={glowVariants}
+                  initial="rest"
+                  whileHover="hover"
                 />
               </motion.div>
             ))}
           </div>
-
-          {/* Mobile Menu Button */}
-          <motion.button
-            className="md:hidden text-yellow-400 p-2 rounded-lg hover:bg-yellow-400/10"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </motion.button>
         </div>
-      </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent" />
-      <div className="absolute -bottom-[5px] left-0 right-0 h-[5px] bg-gradient-to-b from-yellow-400/10 to-transparent" />
+        {/* Mobile Navigation Menu */}
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{
+            height: isOpen ? 'auto' : 0,
+            opacity: isOpen ? 1 : 0,
+          }}
+          transition={{ duration: 0.3 }}
+          className="md:hidden overflow-hidden"
+        >
+          <div className="py-2 space-y-1">
+            {navItems.map((item) => (
+              <ScrollLink
+                key={item.id}
+                to={item.id}
+                spy={true}
+                smooth={true}
+                duration={800}
+                offset={-70}
+                className={`block px-4 py-2 text-base font-medium rounded-md ${
+                  activeSection === item.id
+                    ? 'text-yellow-400 bg-yellow-400/20'
+                    : 'text-gray-300 hover:text-yellow-400 hover:bg-yellow-400/10'
+                }`}
+                onClick={() => {
+                  setIsOpen(false);
+                  setActiveSection(item.id);
+                }}
+              >
+                {item.label}
+              </ScrollLink>
+            ))}
+          </div>
+        </motion.div>
+      </div>
     </motion.nav>
   );
 };
 
-export default Navbar; 
+export default Navbar;
