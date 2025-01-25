@@ -1,208 +1,106 @@
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { TypeAnimation } from 'react-type-animation';
 
 const Hero = () => {
-  const [displayText, setDisplayText] = useState('█');
-  const fullName = "Angel Vergara";
-  
-  useEffect(() => {
-    let currentIndex = 0;
-    let isDeleting = false;
-    let timeoutId;
-
-    const updateText = () => {
-      if (!isDeleting) {
-        // Escribiendo
-        if (currentIndex <= fullName.length) {
-          setDisplayText(fullName.substring(0, currentIndex) + '█');
-          currentIndex++;
-          timeoutId = setTimeout(updateText, 100);
-        } else {
-          // Esperar antes de empezar a borrar
-          timeoutId = setTimeout(() => {
-            isDeleting = true;
-            updateText();
-          }, 2000);
-        }
-      } else {
-        // Borrando
-        if (currentIndex > 0) {
-          setDisplayText(fullName.substring(0, currentIndex - 1) + '█');
-          currentIndex--;
-          timeoutId = setTimeout(updateText, 50);
-        } else {
-          // Reiniciar después de borrar
-          isDeleting = false;
-          timeoutId = setTimeout(updateText, 500);
-        }
-      }
-    };
-
-    updateText();
-    return () => clearTimeout(timeoutId);
-  }, []);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  };
-
-  const codeBlockVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        delay: 1,
-      },
-    },
-  };
-
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Fondo animado */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-tertiary to-primary opacity-90" />
+    <section className="min-h-screen relative overflow-hidden bg-light-primary/80 dark:bg-dark-primary/80 backdrop-blur-sm">
+      {/* Eliminar el div del fondo con puntos */}
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-4 h-screen flex flex-col justify-center">
         <motion.div
-          initial={{ opacity: 0.1 }}
-          animate={{
-            opacity: [0.1, 0.2, 0.1],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-          className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_transparent_65%)] from-secondary/20"
-        />
-      </div>
-
-      <div className="max-w-7xl w-full mx-auto relative z-10 py-12 sm:py-16 lg:py-20">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="text-center sm:text-left px-4 sm:px-6 lg:px-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-3xl"
         >
-          <motion.div variants={itemVariants} className="mb-6">
-            <span className="text-secondary text-lg font-mono">{"<FullStackDeveloper>"}</span>
-          </motion.div>
-
-          <motion.h2
-            variants={itemVariants}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4"
-          >
-            ¡Hola! Mi nombre es
-          </motion.h2>
-
-          <motion.div
-            className="minecraft-font text-3xl sm:text-4xl font-bold mb-4 text-white tracking-wide"
-            style={{ 
-              WebkitTextStroke: "0.5px rgba(255,255,255,0.1)",
-              textShadow: "2px 2px 0px rgba(0,0,0,0.2)"
-            }}
-          >
-            <h1 className="inline-block">
-              {displayText}
-            </h1>
-          </motion.div>
-
-          <motion.h3 variants={itemVariants} className="text-2xl sm:text-4xl text-lightestText mb-8">
-            Desarrollador Full Stack & Creador Digital
-          </motion.h3>
-
           <motion.p
-            variants={itemVariants}
-            className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-6 sm:mb-8"
+            className="text-light-accent dark:text-dark-accent text-lg mb-4 font-mono"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
           >
-            Especializado en crear experiencias digitales excepcionales tanto en el frontend como en el backend.
-            Transformo ideas en soluciones tecnológicas completas y escalables con un enfoque en la innovación y la calidad.
+            &lt;Hello World/&gt;
           </motion.p>
 
-          {/* Código animado */}
-          <motion.div
-            variants={codeBlockVariants}
-            className="bg-tertiary p-4 rounded-lg max-w-lg mx-auto mb-8 text-left font-mono text-sm overflow-hidden"
+          <motion.h1
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-light-text dark:text-dark-text"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
           >
-            <pre className="text-lightText">
-              <code>{`const angel = {
-  fullName: "Angel",
-  role: "Full Stack Developer",
-  passions: ["Web Development", "Innovation", "Problem Solving"],
-  skills: {
-    frontend: ["React", "Tailwind", "JavaScript"],
-    backend: ["Node.js", "Python", "SQL"],
-    architecture: ["REST", "GraphQL", "Microservices"]
-  },
-  currentlyLearning: "Always something new"
-};`}</code>
-            </pre>
-          </motion.div>
+            Soy{' '}
+            <span className="text-light-accent dark:text-dark-accent">
+              <TypeAnimation
+                sequence={[
+                  'Angel Vergara',
+                  2000,
+                  'Desarrollador Web',
+                  2000,
+                  'Diseñador UI/UX',
+                  2000,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+              />
+            </span>
+          </motion.h1>
+
+          <motion.p
+            className="text-light-muted dark:text-dark-muted text-lg sm:text-xl mb-8 max-w-2xl"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            Un desarrollador apasionado por crear experiencias digitales excepcionales.
+            Especializado en desarrollo web moderno y soluciones creativas.
+          </motion.p>
 
           <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4"
+            className="flex flex-wrap gap-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
           >
             <motion.a
-              href="#projects"
+              href="#contact"
+              className="btn"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="btn btn-primary"
+            >
+              Contáctame
+            </motion.a>
+            <motion.a
+              href="#projects"
+              className="btn bg-transparent border-2 border-light-accent dark:border-dark-accent
+                       text-light-accent dark:text-dark-primary 
+                       hover:bg-light-accent/10 dark:hover:bg-dark-accent/10
+                       dark:bg-dark-accent hover:text-light-accent dark:hover:text-dark-primary
+                       transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Ver Proyectos
             </motion.a>
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn btn-outline"
-            >
-              ¡Contáctame!
-            </motion.a>
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="mt-4">
-            <span className="text-secondary text-lg font-mono">{"</FullStackDeveloper>"}</span>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll Indicator */}
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: [0, 10, 0] }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          repeatType: "loop",
-        }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        animate={{
+          y: [0, 10, 0],
+        }}
+        transition={{
+          duration: 1.5,
+          repeat: Infinity,
+        }}
       >
-        <div className="w-6 h-10 border-2 border-secondary rounded-full p-1">
-          <div className="w-1.5 h-1.5 bg-secondary rounded-full mx-auto animate-scroll" />
+        <div className="w-6 h-10 border-2 border-light-accent/30 dark:border-dark-accent/30 rounded-full p-1">
+          <div className="w-1.5 h-1.5 bg-light-accent/50 dark:bg-dark-accent/50 rounded-full mx-auto animate-bounce" />
         </div>
       </motion.div>
-
-      {/* Decorative elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 bg-secondary/10 rounded-full blur-xl" />
-      <div className="absolute bottom-20 right-10 w-32 h-32 bg-blue-500/10 rounded-full blur-xl" />
     </section>
   );
 };

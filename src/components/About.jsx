@@ -1,125 +1,113 @@
 import { motion } from 'framer-motion';
 
 const About = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { 
-      y: 20, 
-      opacity: 0,
-      filter: 'blur(10px)'
-    },
-    visible: {
-      y: 0,
-      opacity: 1,
-      filter: 'blur(0px)',
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15
-      }
-    }
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.5 }
   };
 
   return (
-    <section id="about" className="min-h-screen bg-black py-12 sm:py-20 px-4 relative overflow-hidden">
-      {/* Fondo animado */}
-      <div className="absolute inset-0">
-        <motion.div
-          initial={{ opacity: 0.1 }}
-          animate={{
-            opacity: [0.1, 0.2, 0.1],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-          className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--yellow)_0%,_transparent_70%)] opacity-10"
-        />
+    <section id="about" className="py-20 relative overflow-hidden bg-light-primary/80 dark:bg-dark-primary/80 backdrop-blur-sm">
+      {/* Fondo con líneas diagonales sutiles */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `linear-gradient(45deg, currentColor 1px, transparent 1px)`,
+          backgroundSize: '30px 30px'
+        }} />
       </div>
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
-          className="text-center space-y-8 sm:space-y-12"
+      <div className="max-w-7xl mx-auto px-4 relative z-10">
+        <motion.h2 
+          className="text-3xl md:text-4xl font-bold text-center mb-16 text-light-text dark:text-dark-text"
+          {...fadeInUp}
         >
-          <motion.h2 
-            variants={itemVariants}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold inline-block"
+          Sobre Mí
+        </motion.h2>
+
+        <div className="grid md:grid-cols-2 gap-12">
+          <motion.div 
+            className="space-y-6"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
           >
-            <span className="bg-gradient-to-r from-yellow-400 to-yellow-200 text-transparent bg-clip-text">
-              Sobre Mí
-            </span>
-          </motion.h2>
-
-          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
-            <motion.div 
-              variants={itemVariants}
-              className="relative group"
-            >
-              <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 to-yellow-200 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000"></div>
-              <div className="relative bg-black/80 p-4 sm:p-6 rounded-lg border border-yellow-400/30 hover:border-yellow-400/60 transition duration-300 h-full">
-                <h3 className="text-xl sm:text-2xl font-bold text-yellow-400 mb-3 sm:mb-4">Mi Trayectoria</h3>
-                <p className="text-sm sm:text-base text-yellow-100/90 leading-relaxed">
-                  Soy un desarrollador apasionado por crear soluciones digitales innovadoras. 
-                  Mi viaje en el desarrollo web comenzó con la curiosidad por entender cómo funcionan las cosas, 
-                  y se convirtió en una pasión por construir experiencias digitales excepcionales.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              variants={itemVariants}
-              className="relative group"
-            >
-              <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 to-yellow-200 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000"></div>
-              <div className="relative bg-black/80 p-4 sm:p-6 rounded-lg border border-yellow-400/30 hover:border-yellow-400/60 transition duration-300 h-full">
-                <h3 className="text-xl sm:text-2xl font-bold text-yellow-400 mb-3 sm:mb-4">Mi Enfoque</h3>
-                <p className="text-sm sm:text-base text-yellow-100/90 leading-relaxed">
-                  Me especializo en desarrollar aplicaciones web modernas y escalables, 
-                  combinando tecnologías frontend y backend para crear soluciones completas. 
-                  Mi objetivo es siempre entregar productos que no solo funcionen perfectamente, 
-                  sino que también proporcionen una experiencia de usuario excepcional.
-                </p>
-              </div>
-            </motion.div>
-          </div>
+            <h3 className="text-2xl font-bold text-light-accent dark:text-dark-accent">
+              Mi Historia
+            </h3>
+            <p className="text-light-muted dark:text-dark-muted leading-relaxed">
+              Comencé mi viaje en el desarrollo web por curiosidad y pasión por la tecnología.
+              Autodidacta por naturaleza, he dedicado incontables horas a aprender y perfeccionar
+              mis habilidades en desarrollo web moderno.
+            </p>
+            <p className="text-light-muted dark:text-dark-muted leading-relaxed">
+              Mi enfoque se centra en crear experiencias web excepcionales que combinen
+              diseño atractivo con funcionalidad robusta.
+            </p>
+          </motion.div>
 
           <motion.div 
-            variants={itemVariants}
-            className="mt-12 relative group max-w-3xl mx-auto"
+            className="space-y-8"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
           >
-            <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 to-yellow-200 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000"></div>
-            <div className="relative bg-black/80 p-6 rounded-lg border border-yellow-400/30 hover:border-yellow-400/60 transition duration-300">
-              <h3 className="text-2xl font-bold text-yellow-400 mb-4">Objetivos</h3>
-              <p className="text-yellow-100/90 leading-relaxed">
-                Busco constantemente nuevos desafíos que me permitan crecer como desarrollador 
-                y contribuir a proyectos innovadores. Mi pasión por aprender y mejorar me impulsa 
-                a mantenerme actualizado con las últimas tecnologías y mejores prácticas en el 
-                desarrollo web.
-              </p>
+            <div className="space-y-4">
+              <h3 className="text-2xl font-bold text-light-accent dark:text-dark-accent">
+                Educación
+              </h3>
+              <ul className="space-y-4">
+                <li className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-light-accent dark:bg-dark-accent mt-2" />
+                  <div>
+                    <h4 className="font-medium text-light-text dark:text-dark-text">Desarrollo Web Fullstack</h4>
+                    <p className="text-light-muted dark:text-dark-muted">Autodidacta | 2020 - Presente</p>
+                  </div>
+                </li>
+                {/* Añade más elementos de educación según necesites */}
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-2xl font-bold text-light-accent dark:text-dark-accent">
+                Intereses
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {['Desarrollo Web', 'UI/UX', 'Tecnología', 'Innovación', 'Open Source'].map((interest, index) => (
+                  <span 
+                    key={index}
+                    className="px-4 py-2 rounded-full text-sm 
+                             bg-light-secondary dark:bg-dark-secondary
+                             text-light-text dark:text-dark-text
+                             border border-light-border dark:border-dark-border"
+                  >
+                    {interest}
+                  </span>
+                ))}
+              </div>
             </div>
           </motion.div>
+        </div>
+
+        <motion.div 
+          className="mt-16 p-6 rounded-xl bg-light-secondary dark:bg-dark-secondary border border-light-border dark:border-dark-border"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <h3 className="text-2xl font-bold mb-4 text-light-accent dark:text-dark-accent text-center">
+            Objetivos Profesionales
+          </h3>
+          <p className="text-light-muted dark:text-dark-muted text-center max-w-3xl mx-auto">
+            Busco constantemente oportunidades para crecer como desarrollador y contribuir a
+            proyectos innovadores. Mi objetivo es crear soluciones tecnológicas que marquen
+            la diferencia y aprender continuamente en el proceso.
+          </p>
         </motion.div>
       </div>
-
-      {/* Elementos decorativos */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-yellow-400/10 rounded-full blur-xl" />
-      <div className="absolute bottom-20 right-10 w-48 h-48 bg-yellow-400/10 rounded-full blur-xl" />
     </section>
   );
 };

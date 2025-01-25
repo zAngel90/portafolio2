@@ -1,171 +1,171 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://rsms.me/inter/inter.css');
+@import url('https://cdn.jsdelivr.net/npm/fira-code@6.2.0/distr/fira_code.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --black: #000000;
-  --yellow: #FFD700;
-  --dark-yellow: #FFB700;
-  --light-yellow: #FFED4A;
-}
-
-body {
-  background-color: var(--black);
-  color: var(--yellow);
-  font-family: 'Inter', sans-serif;
-}
-
-/* Efecto de resplandor amarillo */
-.glow-effect {
-  position: relative;
-}
-
-.glow-effect::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  background: linear-gradient(45deg, var(--yellow), transparent, var(--yellow));
-  filter: blur(5px);
-  z-index: -1;
-}
-
-/* Efecto de texto con brillo */
-.text-glow {
-  text-shadow: 0 0 10px var(--yellow),
-               0 0 20px var(--yellow),
-               0 0 30px var(--yellow);
-}
-
-/* Efecto de borde brillante */
-.border-glow {
-  position: relative;
-  border: 1px solid var(--yellow);
-  box-shadow: 0 0 10px var(--yellow),
-              inset 0 0 10px var(--yellow);
-}
-
-/* Efecto de hover con glitch */
-.glitch-hover:hover {
-  animation: glitch 0.3s infinite;
-  color: var(--light-yellow);
-}
-
-/* Efecto de partículas de fondo */
-.particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.particle {
-  position: absolute;
-  background: var(--yellow);
-  border-radius: 50%;
-  opacity: 0.3;
-  animation: float 3s infinite ease-in-out;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
+@layer base {
+  html {
+    @apply antialiased scroll-smooth;
   }
-  50% {
-    transform: translateY(-20px);
+
+  body {
+    @apply bg-light-primary dark:bg-dark-primary 
+           text-light-text dark:text-dark-text;
   }
 }
 
-/* Scrollbar personalizada */
+@layer components {
+  /* Botones */
+  .btn {
+    @apply px-6 py-3 rounded-lg font-medium transition-all duration-200
+           bg-light-accent dark:bg-dark-accent 
+           text-light-primary dark:text-dark-primary
+           hover:opacity-90 focus:ring-2 focus:ring-offset-2
+           focus:ring-light-accent dark:focus:ring-dark-accent;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500;
+  }
+
+  .btn-secondary {
+    @apply btn bg-secondary-500 text-white hover:bg-secondary-600 focus:ring-secondary-500;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-primary-500 text-primary-400 hover:bg-primary-500/10 focus:ring-primary-500;
+  }
+
+  /* Cards y contenedores */
+  .card {
+    @apply bg-light-secondary dark:bg-dark-secondary
+           border border-light-border dark:border-dark-border
+           rounded-xl shadow-lg transition-all duration-200;
+  }
+
+  .glass {
+    @apply bg-light-secondary/80 dark:bg-dark-secondary/80 
+           backdrop-blur-md 
+           border border-light-border/50 dark:border-dark-border/50
+           shadow-lg transition-all duration-300;
+  }
+
+  /* Formularios */
+  .input {
+    @apply w-full px-4 py-3 rounded-lg
+           bg-light-secondary dark:bg-dark-secondary
+           border border-light-border dark:border-dark-border
+           text-light-text dark:text-dark-text
+           focus:ring-2 focus:ring-light-accent dark:focus:ring-dark-accent
+           focus:border-transparent;
+  }
+
+  /* Títulos y texto */
+  .section-title {
+    @apply text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r
+           from-primary-400 to-secondary-400 mb-8;
+  }
+
+  .gradient-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r
+           from-primary-400 to-secondary-400;
+  }
+
+  /* Enlaces */
+  .link {
+    @apply text-light-accent dark:text-dark-accent 
+           hover:opacity-80 transition-opacity duration-200;
+  }
+
+  /* Código */
+  .code {
+    @apply font-mono 
+           bg-light-secondary/50 dark:bg-dark-secondary/50 
+           rounded-lg p-4 text-sm leading-relaxed
+           border border-light-border/50 dark:border-dark-border/50 
+           overflow-x-auto;
+  }
+}
+
+/* Cursor personalizado */
+.custom-cursor {
+  @apply fixed w-8 h-8 pointer-events-none z-[9999] rounded-full 
+         border-2 border-light-accent dark:border-dark-accent top-0 left-0;
+  transition: width 0.3s ease-out, height 0.3s ease-out;
+}
+
+.cursor-dot {
+  @apply fixed w-2 h-2 pointer-events-none z-[9999] 
+         bg-light-accent dark:bg-dark-accent
+         rounded-full top-0 left-0;
+}
+
+.custom-cursor.scale-150 {
+  @apply w-12 h-12;
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  @apply w-2;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--black);
+  @apply bg-light-secondary dark:bg-dark-secondary;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--yellow);
-  border-radius: 4px;
+  @apply bg-light-accent/20 dark:bg-dark-accent/20
+         rounded-full 
+         hover:bg-light-accent/30 dark:hover:bg-dark-accent/30 
+         transition-colors;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--light-yellow);
+/* Efectos y animaciones */
+.noise-bg::before {
+  content: '';
+  @apply fixed inset-0 pointer-events-none opacity-[0.015] z-[-1];
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* Selección de texto */
-::selection {
-  background: var(--yellow);
-  color: var(--black);
-}
-
-/* Animaciones de entrada */
-.slide-in-left {
-  animation: slideInLeft 0.8s ease-out forwards;
-}
-
-.slide-in-right {
-  animation: slideInRight 0.8s ease-out forwards;
-}
-
-.fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.scale-in {
-  animation: scaleIn 0.5s ease-out forwards;
-}
-
-@keyframes slideInLeft {
-  from {
-    transform: translateX(-100px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
+/* Media queries */
+@media (min-width: 769px) {
+  body, 
+  button, 
+  a {
+    @apply cursor-none;
   }
 }
 
-@keyframes slideInRight {
-  from {
-    transform: translateX(100px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
+@media (max-width: 768px) {
+  .custom-cursor,
+  .cursor-dot {
+    @apply hidden;
   }
 }
 
-@keyframes fadeInUp {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+/* Transiciones suaves para cambios de tema */
+.transition-theme {
+  @apply transition-all duration-200;
 }
 
-@keyframes scaleIn {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+/* Transiciones suaves para cambios de tema */
+:root {
+  --transition-duration: 0ms;
+  --grid-color: rgba(0, 0, 0, 0.1);
+  --dot-color: rgba(0, 0, 0, 0.5);
 }
 
-.minecraft-font {
-  font-family: 'Press Start 2P', cursive;
-  letter-spacing: 0.1em;
-  line-height: 1.5;
+.dark {
+  --grid-color: rgba(255, 255, 255, 0.1);
+  --dot-color: rgba(255, 255, 255, 0.5);
 }
+
+* {
+  transition: background-color var(--transition-duration) ease-in-out,
+              border-color var(--transition-duration) ease-in-out,
+              color var(--transition-duration) ease-in-out,
+              box-shadow var(--transition-duration) ease-in-out;
+}
+

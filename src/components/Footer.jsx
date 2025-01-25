@@ -1,105 +1,112 @@
 import { motion } from 'framer-motion';
-import { FiMail, FiPhone, FiGithub, FiLinkedin } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiArrowUp } from 'react-icons/fi';
 
 const Footer = () => {
-  return (
-    <footer className="bg-black relative overflow-hidden">
-      {/* Efecto de gradiente */}
-      <div className="absolute inset-0 bg-gradient-to-t from-yellow-400/5 to-transparent" />
-      
-      <div className="max-w-7xl mx-auto px-4 py-12 relative">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          {/* Columna izquierda */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="space-y-4"
-          >
-            <h2 className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-200 text-transparent bg-clip-text">
-              Angel Vergara
-            </h2>
-            <p className="text-yellow-200/80">
-              Desarrollador Full Stack & Creador Digital
-            </p>
-          </motion.div>
+  const socialLinks = [
+    {
+      name: 'GitHub',
+      icon: FiGithub,
+      href: 'https://github.com/zAngel90'
+    },
+    {
+      name: 'LinkedIn',
+      icon: FiLinkedin,
+      href: 'https://linkedin.com/in/tu-perfil'
+    },
+    {
+      name: 'Twitter',
+      icon: FiTwitter,
+      href: 'https://twitter.com/tu-perfil'
+    },
+    {
+      name: 'Email',
+      icon: FiMail,
+      href: 'mailto:tu@email.com'
+    }
+  ];
 
-          {/* Columna derecha */}
-          <motion.div
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  return (
+    <footer className="relative overflow-hidden bg-light-primary/80 dark:bg-dark-primary/80 backdrop-blur-sm">
+      <div className="max-w-7xl mx-auto px-4 py-12 relative z-10">
+        <div className="grid md:grid-cols-3 gap-8 items-center border-t border-light-border dark:border-dark-border pt-8">
+          {/* Columna izquierda */}
+          <div className="text-center md:text-left">
+            <motion.h3 
+              className="text-xl font-bold text-light-text dark:text-dark-text mb-2"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              Angel Vergara
+            </motion.h3>
+            <motion.p 
+              className="text-light-muted dark:text-dark-muted"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              Desarrollador Web Full Stack
+            </motion.p>
+          </div>
+
+          {/* Columna central - Enlaces sociales */}
+          <motion.div 
+            className="flex justify-center gap-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="space-y-4"
           >
-            <div className="flex items-center space-x-3 group">
-              <FiMail className="text-yellow-400 group-hover:text-yellow-200 transition-colors" />
-              <a 
-                href="mailto:av020431@gmail.com"
-                className="text-yellow-200/80 hover:text-yellow-400 transition-colors"
+            {socialLinks.map((link) => (
+              <motion.a
+                key={link.name}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg text-light-text dark:text-dark-text
+                         hover:text-light-accent dark:hover:text-dark-accent
+                         transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                aria-label={link.name}
               >
-                av020431@gmail.com
-              </a>
-            </div>
-            <div className="flex items-center space-x-3 group">
-              <FiPhone className="text-yellow-400 group-hover:text-yellow-200 transition-colors" />
-              <a 
-                href="tel:+573105334580"
-                className="text-yellow-200/80 hover:text-yellow-400 transition-colors"
-              >
-                +57 3105334580
-              </a>
-            </div>
+                <link.icon className="w-5 h-5" />
+              </motion.a>
+            ))}
           </motion.div>
+
+          {/* Columna derecha */}
+          <div className="flex justify-center md:justify-end">
+            <motion.button
+              onClick={scrollToTop}
+              className="p-2 rounded-lg bg-light-secondary dark:bg-dark-secondary
+                       text-light-text dark:text-dark-text
+                       hover:text-light-accent dark:hover:text-dark-accent
+                       transition-colors group"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Volver arriba"
+            >
+              <FiArrowUp className="w-5 h-5 transform group-hover:-translate-y-1 transition-transform" />
+            </motion.button>
+          </div>
         </div>
 
-        {/* Línea divisoria */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="h-px bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent my-8"
-        />
-
-        {/* Copyright y redes sociales */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="text-yellow-200/60 text-sm"
-          >
-            © 2024 Angel Vergara. Todos los derechos reservados.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="flex space-x-4"
-          >
-            <a
-              href="#"
-              className="text-yellow-400 hover:text-yellow-200 transition-colors p-2 hover:bg-yellow-400/10 rounded-full"
-            >
-              <FiGithub size={20} />
-            </a>
-            <a
-              href="#"
-              className="text-yellow-400 hover:text-yellow-200 transition-colors p-2 hover:bg-yellow-400/10 rounded-full"
-            >
-              <FiLinkedin size={20} />
-            </a>
-          </motion.div>
-        </div>
-
-        {/* Elementos decorativos */}
-        <div className="absolute bottom-0 left-1/4 w-64 h-64 bg-yellow-400/5 rounded-full blur-3xl" />
-        <div className="absolute top-0 right-1/4 w-48 h-48 bg-yellow-400/5 rounded-full blur-2xl" />
+        {/* Copyright */}
+        <motion.div 
+          className="text-center mt-8 text-light-muted dark:text-dark-muted text-sm"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <p>© {new Date().getFullYear()} Angel Vergara. Todos los derechos reservados.</p>
+        </motion.div>
       </div>
     </footer>
   );
