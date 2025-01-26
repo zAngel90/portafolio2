@@ -4,6 +4,13 @@ import { FiGithub, FiExternalLink } from 'react-icons/fi';
 const Projects = () => {
   const projects = [
     {
+      title: "TechDrop",
+      description: "Plataforma innovadora de dropshipping tecnológico que ofrece análisis en tiempo real de productos, métricas de ventas y tendencias del mercado. Diseño moderno con interfaz intuitiva y visualización de datos avanzada.",
+      image: "https://i.imgur.com/BuJ73Nr.png",
+      tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "React Query", "Recharts"],
+      live: "https://techdrop-b3wq.vercel.app/",
+    },
+    {
       title: "Lobomat Shop",
       description: "Plataforma de comercio electrónico especializada en la venta de V-Bucks para Fortnite. Implementa pasarelas de pago seguras, autenticación avanzada y un diseño moderno con animaciones fluidas.",
       image: "https://i.imgur.com/jIpsuEg.png",
@@ -37,7 +44,7 @@ const Projects = () => {
       image: "https://i.imgur.com/cGonmDC.png",
       tech: ["Next.js", "TypeScript", "Tailwind CSS"],
       live: "https://starbucks-gules-six.vercel.app/",
-    }
+    },
   ];
 
   return (

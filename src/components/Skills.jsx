@@ -103,18 +103,18 @@ const Skills = () => {
           </h3>
           <div className="flex flex-wrap justify-center gap-4">
             {[
-              "Liderazgo de equipo",
-              "Colaboración efectiva",
-              "Mentoría y enseñanza",
-              "Resolución creativa de problemas",
-              "Comunicación asertiva",
-              "Adaptabilidad rápida",
-              "Gestión de proyectos",
+              "Trabajo en equipo",
+              "Resolución de problemas",
+              "Comunicación efectiva",
+              "Organización",
+              "Atención al detalle",
               "Pensamiento analítico",
-              "Empatía y escucha activa",
-              "Toma de decisiones",
-              "Resiliencia",
-              "Proactividad"
+              "Aprendizaje continuo",
+              "Adaptabilidad",
+              "Gestión del tiempo",
+              "Colaboración remota",
+              "Documentación técnica",
+              "Metodologías ágiles"
             ].map((skill, index) => (
               <motion.span
                 key={skill}
