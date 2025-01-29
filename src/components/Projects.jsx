@@ -4,6 +4,14 @@ import { FiGithub, FiExternalLink } from 'react-icons/fi';
 const Projects = () => {
   const projects = [
     {
+        title: "SoundWave",
+        description: "Aplicación móvil desarrollada en Flutter que permite reproducir música almacenada localmente. Cuenta con una interfaz moderna y minimalista, gestión de playlists, y controles de reproducción avanzados.",
+        image: "https://imgur.com/Ix6lblN.jpg",
+        tech: ["Flutter", "Dart", "Provider", "SQLite", "Audio Players"],
+        github: "https://github.com/zAngel90/reproductorflutter"
+
+    },
+    {
       title: "TechDrop",
       description: "Plataforma innovadora de dropshipping tecnológico que ofrece análisis en tiempo real de productos, métricas de ventas y tendencias del mercado. Diseño moderno con interfaz intuitiva y visualización de datos avanzada.",
       image: "https://i.imgur.com/BuJ73Nr.png",
@@ -48,7 +56,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 relative overflow-hidden bg-light-primary/80 dark:bg-dark-primary/80 backdrop-blur-sm">
+    <section id="projects" className="py-20 relative overflow-hidden bg-light-primary/80 dark:bg-dark-primary/80">
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -82,8 +90,8 @@ const Projects = () => {
                     alt={project.title}
                     className="w-full h-full object-cover object-center"
                   />
-                  <div className="absolute inset-0 bg-light-accent/10 dark:bg-dark-accent/10 backdrop-blur-sm
-                                group-hover:backdrop-blur-none transition-all duration-500" />
+                    <div className="absolute inset-0 bg-light-accent/10 dark:bg-dark-accent/10 
+                          transition-all duration-500" />
                 </div>
               </motion.div>
 
@@ -112,18 +120,34 @@ const Projects = () => {
                 </div>
 
                 <div className="flex gap-4 pt-4">
+                  {project.github && (
+                  <motion.a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-lg bg-light-secondary dark:bg-dark-secondary
+                      text-light-text dark:text-dark-text hover:text-light-accent dark:hover:text-dark-accent
+                      transition-colors duration-300"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <FiGithub className="w-6 h-6" />
+                  </motion.a>
+                  )}
+                  {project.live && (
                   <motion.a
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg bg-light-secondary dark:bg-dark-secondary
-                             text-light-text dark:text-dark-text hover:text-light-accent dark:hover:text-dark-accent
-                             transition-colors duration-300"
+                      text-light-text dark:text-dark-text hover:text-light-accent dark:hover:text-dark-accent
+                      transition-colors duration-300"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                   >
                     <FiExternalLink className="w-6 h-6" />
                   </motion.a>
+                  )}
                 </div>
               </div>
             </motion.article>
